@@ -72,28 +72,39 @@ def main():
         layout="wide"
     )
 
+    import base64
+
+    def get_base64_image(image_path):
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+
+    img_base64 = get_base64_image("assets/beach_bg.png")
+
     st.markdown(
-    """
-    <style>
-    [data-testid="stSidebar"] {
-        background-color: #FDFD96;
-    }
-    [data-testid="stMain"],
-    [data-testid="stAppViewContainer"],
-    .stApp {
-        background: linear-gradient(180deg, #FFF6D0 0%, #FFE9A8 55%, #FFDDA0 100%);
-        background-attachment: fixed;
-    }
-    /* 상단 흰색 툴바 */
-    [data-testid="stHeader"] {
-        background: transparent;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
+        f"""
+        <style>
+        [data-testid="stSidebar"] {{
+            background-color: #FDFD96;
+        }}
+        [data-testid="stMain"],
+        [data-testid="stAppViewContainer"],
+        .stApp {{
+            background-image: url("data:image/png;base64,{img_base64}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+        [data-testid="stHeader"] {{
+            background: transparent;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
     )
+
     st.title("✈️ 여행 계획 AI 에이전트")
     st.markdown("---")
+    ...  # 나머지 코드는 그대로
 
     # 사이드바
     with st.sidebar:
