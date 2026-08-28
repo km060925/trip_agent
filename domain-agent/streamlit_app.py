@@ -1,10 +1,20 @@
+import os
 from pathlib import Path
 
 import streamlit as st
 from dotenv import load_dotenv
 
-# 이 파일 위치(domain-agent) 기준으로 상위(trip_agent)의 .env를 명시적으로 로드
+# 이 파일 위치(domain-agent) 기준으로 상위(trip_agent)의 .env를 명시적으로 로드 (로컬 실행용)
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+
+# Streamlit Cloud 등 클라우드 배포 환경에는 .env가 없으므로, Secrets(st.secrets)에
+# 값이 있으면 이를 환경변수로 채워 넣어 로컬/클라우드 어디서든 동일하게 동작하도록 함
+try:
+    for _key in ("OPENAI_API_KEY", "TAVILY_API_KEY"):
+        if not os.getenv(_key) and _key in st.secrets:
+            os.environ[_key] = st.secrets[_key]
+except Exception:
+    pass  # secrets.toml이 없는 로컬 환경 등에서는 조용히 무시
 
 from langchain_core.messages import AIMessage, ToolMessage
 from agent import agent
@@ -60,6 +70,22 @@ def main():
         page_title="여행 계획 AI 에이전트",
         page_icon="✈️",
         layout="wide"
+    )
+
+    st.markdown(
+        """
+        <style>
+        /* 좌측 사이드바: 진한 노란색 */
+        [data-testid="stSidebar"] {
+            background-color: #F4C430;
+        }
+        /* 우측 채팅 영역: 연한 노란색 */
+        [data-testid="stAppViewContainer"] > .main {
+            background-color: #FFF9C4;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
     )
 
     st.title("✈️ 여행 계획 AI 에이전트")
