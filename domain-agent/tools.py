@@ -1,9 +1,10 @@
 from langchain.tools import tool
 from langchain_tavily import TavilySearch
-from typing import Optional
+from typing import Optional, TypedDict
 import subprocess
 import sys
 import os
+import requests
 
 # ============================================
 # 여행지 추천 도메인 도구
@@ -892,11 +893,152 @@ def confirm_booking(
         return f"오류: {str(e)}"
 
 
+# ============================================
+# 스킬 관련 도구 (Progressive Disclosure 패턴)
+# ============================================
+
+DEFAULT_CHUNK_SIZE = 15_000
+
+
+class Skill(TypedDict):
+    """Progressive Disclosure 패턴에서 사용되는 스킬 구조
+
+    Attributes:
+        name: 스킬의 고유 식별자
+        description: 시스템 프롬프트에 표시될 1-2문장 설명
+        content: load_skill 도구로 로드되는 전체 스킬 내용
+    """
+    name: str
+    description: str
+    content: str  # 실제로는 파일에서 on-demand로 로드됨
+
+
+@tool
+def fetch_url(
+    url: str,
+    offset: int = 0,
+    chunk_size: int = DEFAULT_CHUNK_SIZE,
+) -> str:
+    """URL의 내용을 페이지(chunk) 단위로 가져옵니다.
+
+    Progressive Disclosure 패턴에서 외부 리소스를 가져오는 데 사용됩니다.
+    긴 문서는 chunk 단위로 나누어 읽을 수 있습니다.
+
+    반환값에 "남은 내용 존재: True"가 있으면 부족한 정보를 더 읽기 위해
+    fetch_url()을 다시 호출하여 offset=다음 offset으로 이어서 읽어야 합니다.
+
+    Args:
+        url: 가져올 URL (예: https://docs.langchain.com/llms.txt)
+        offset: 읽기 시작할 문자 위치 (기본값: 0)
+        chunk_size: 한 번에 가져올 문자 수 (기본값: 15,000)
+
+    Returns:
+        현재 chunk와 다음 offset 정보를 포함한 문자열
+    """
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+
+        text = response.text
+        total_length = len(text)
+
+        if offset >= total_length:
+            return f"문서 끝에 도달했습니다.\n전체 길이: {total_length}\noffset={offset}"
+
+        end = min(offset + chunk_size, total_length)
+        chunk = text[offset:end]
+        has_more = end < total_length
+        next_offset = end if has_more else None
+
+        return f"""# URL Chunk
+
+URL: {url}
+
+전체 길이: {total_length}
+현재 범위: {offset} ~ {end}
+
+다음 offset: {next_offset}
+남은 내용 존재: {has_more}
+
+--------------------
+{chunk}
+"""
+    except requests.RequestException as e:
+        return f"URL 가져오기 실패: {e}"
+
+
+@tool(parse_docstring=True)
+def load_skill(skill_name: str) -> str:
+    """특정 도메인에 대한 전문 지식 스킬을 로드합니다.
+
+    Progressive Disclosure 패턴의 핵심 도구로, 필요한 스킬의 상세 내용을
+    on-demand로 로드합니다. 현지 문화/매너(local-etiquette), 일정·예산 계획
+    (itinerary-planning), 응급 상황 대처(emergency-info) 같은 전문 지식이
+    필요한 질문에 사용하세요.
+
+    **중요**: 스킬이 로드되면 그 안에 정의된 프로세스를 반드시 따라야 합니다.
+    스킬은 단순 참고 자료가 아니라 실행 지침입니다.
+
+    Args:
+        skill_name: 로드할 스킬 이름 (예: 'local-etiquette', 'itinerary-planning', 'emergency-info')
+
+    Returns:
+        스킬의 전체 내용 (SKILL.md 파일) 또는 오류 메시지
+    """
+    try:
+        skills_dir = os.path.join(os.path.dirname(__file__), "skills")
+        skill_path = os.path.join(skills_dir, skill_name, "SKILL.md")
+
+        if not os.path.exists(skill_path):
+            available_skills = []
+            if os.path.exists(skills_dir):
+                for item in os.listdir(skills_dir):
+                    item_path = os.path.join(skills_dir, item)
+                    if os.path.isdir(item_path):
+                        skill_file = os.path.join(item_path, "SKILL.md")
+                        if os.path.exists(skill_file):
+                            available_skills.append(item)
+
+            error_msg = f"오류: '{skill_name}' 스킬을 찾을 수 없습니다."
+            if available_skills:
+                error_msg += "\n\n사용 가능한 스킬:\n" + "\n".join(f"- {s}" for s in available_skills)
+            else:
+                error_msg += "\n\n현재 사용 가능한 스킬이 없습니다."
+            return error_msg
+
+        with open(skill_path, "r", encoding="utf-8") as f:
+            skill_content = f.read()
+
+        return (
+            f"✅ [스킬 로드 완료: {skill_name}]\n\n"
+            f"{'=' * 70}\n"
+            f"{skill_content}\n"
+            f"{'=' * 70}\n\n"
+            f"**다음 단계**: 위 스킬에 정의된 프로세스를 단계별로 따라 실행하세요.\n"
+        )
+    except PermissionError:
+        return f"오류: 스킬 파일에 대한 읽기 권한이 없습니다: {skill_path}"
+    except Exception as e:
+        return f"오류: 스킬 로드 중 문제가 발생했습니다: {str(e)}"
+
+
+# 스킬(현지 문화, 일정 계획, 응급 정보)이 웹에서 최신 정보를 찾아올 때 사용하는 범용 검색 도구.
+# search_flights/search_hotels/get_tourist_attractions의 Agoda/Tripadvisor 전용 검색과는 별개.
+web_search = TavilySearch(
+    max_results=3,
+    topic="general",
+    description="인터넷에서 최신 정보를 검색합니다. 실시간 정보나 최근 뉴스가 필요할 때 사용하세요.",
+)
+
+
 CUSTOM_TOOLS = [
     search_flights,
     search_hotels,
     get_tourist_attractions,
     confirm_booking,
+    fetch_url,
+    load_skill,
+    web_search,
 ]
 
 FILE_TOOLS = [

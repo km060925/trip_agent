@@ -5,6 +5,7 @@ from middleware import (
     search_log_middleware,
     holiday_notice_middleware,
     trip_summary_middleware,
+    SkillMiddleware,
 )
 
 
@@ -23,6 +24,12 @@ def create_travel_agent():
   호텔을 확정할 때는 반드시 search_hotels 결과에 있던 그 호텔의 실제 아고다 URL을
   booking_url 인자로 그대로 전달하고, check_out과 guests도 함께 넘기세요.
   (URL을 직접 지어내지 말고, 검색 결과에 실제로 나온 링크만 사용하세요.)
+- 스킬(load_skill): 현지 문화/매너, 일정·예산 계획, 응급 상황 대처처럼 전문 지식이 필요한
+  질문에는 시스템 프롬프트 하단의 "사용 가능한 스킬" 목록에서 관련 스킬을 찾아
+  load_skill로 로드한 뒤, 그 스킬에 정의된 절차를 그대로 따라 답변하세요.
+- 웹 검색(web_search)/문서 조회(fetch_url): 스킬을 수행하는 과정에서 최신 정보나
+  외부 문서가 필요할 때 사용하세요. 항공권/호텔/관광지 검색에는 사용하지 마세요
+  (그건 search_flights/search_hotels/get_tourist_attractions 전용입니다).
 
 사용자의 요청을 정확히 이해하고, 적절한 도구를 사용하여 여행 계획을 도와주세요.
 
@@ -51,7 +58,8 @@ def create_travel_agent():
             travel_context_middleware,  # 오늘 날짜/계절 컨텍스트 주입
             search_log_middleware,      # 검색 이력 기록
             holiday_notice_middleware,  # 관광지 정기 휴무일 안내
-            trip_summary_middleware,  # 예약 확정 시 여행 계획 요약
+            trip_summary_middleware,    # 예약 확정 시 여행 계획 요약
+            SkillMiddleware(),          # 사용 가능한 스킬 목록을 시스템 프롬프트에 주입
         ],
     )
 
