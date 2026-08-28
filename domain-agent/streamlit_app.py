@@ -80,8 +80,8 @@ def main():
             background-color: #F4C430;
         }
         /* 우측 채팅 영역: 연한 노란색 */
-        [data-testid="stAppViewContainer"] > .main {
-            background-color: #FDFD96;
+        [data-testid="stMain"] {
+            background-color: #FFF9C4;
         }
         </style>
         """,
