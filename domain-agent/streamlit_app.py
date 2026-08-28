@@ -73,21 +73,21 @@ def main():
     )
 
     st.markdown(
-        """
-        <style>
-        /* 좌측 사이드바: 진한 노란색 */
-        [data-testid="stSidebar"] {
-            background-color: #FDFD96;
-        }
-        /* 우측 채팅 영역: 연한 노란색 */
-        [data-testid="stMain"] {
-            background-color: #FFF9C4;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
+    """
+    <style>
+    /* 좌측 사이드바: 진한 노란색 */
+    [data-testid="stSidebar"] {
+        background-color: #FDFD96;
+    }
+    /* 우측 채팅 영역: 휴가 느낌 그라디언트 배경 */
+    [data-testid="stMain"] {
+        background: linear-gradient(180deg, #FFF6D0 0%, #FFE9A8 55%, #FFDDA0 100%);
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
     )
-
     st.title("✈️ 여행 계획 AI 에이전트")
     st.markdown("---")
 
