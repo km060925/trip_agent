@@ -72,17 +72,31 @@ def main():
         layout="wide"
     )
 
+    import base64
+
+    def get_base64_image(image_path):
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+
+    img_base64 = get_base64_image("assets/beach_bg.png")
+
     st.markdown(
-        """
+        f"""
         <style>
-        /* 좌측 사이드바: 진한 노란색 */
-        [data-testid="stSidebar"] {
-            background-color: #F4C430;
-        }
-        /* 우측 채팅 영역: 연한 노란색 */
-        [data-testid="stMain"] {
-            background-color: #FFF9C4;
-        }
+        [data-testid="stSidebar"] {{
+            background-color: #FDFD96;
+        }}
+        [data-testid="stMain"],
+        [data-testid="stAppViewContainer"],
+        .stApp {{
+            background-image: url("data:image/png;base64,{img_base64}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+        [data-testid="stHeader"] {{
+            background: transparent;
+        }}
         </style>
         """,
         unsafe_allow_html=True,
