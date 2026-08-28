@@ -77,7 +77,7 @@ def main():
         <style>
         /* 좌측 사이드바: 진한 노란색 */
         [data-testid="stSidebar"] {
-            background-color: #F4C430;
+            background-color: #FDFD96;
         }
         /* 우측 채팅 영역: 연한 노란색 */
         [data-testid="stMain"] {
