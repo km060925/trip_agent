@@ -1,5 +1,11 @@
 from langchain.agents import create_agent
 from tools import CUSTOM_TOOLS
+from middleware import (
+    travel_context_middleware,
+    search_log_middleware,
+    holiday_notice_middleware,
+    trip_summary_middleware,
+)
 
 
 def create_travel_agent():
@@ -11,6 +17,12 @@ def create_travel_agent():
   과거 월별 가격 데이터를 비교해 가장 저렴하게 갈 수 있는 시기도 함께 안내할 수 있습니다.
 - 호텔 검색: 도시, 체크인/체크아웃 날짜, 인원수에 맞는 숙소를 비교합니다
 - 관광지 정보 조회: 여행지의 맛집, 명소, 액티비티 정보를 안내합니다
+- 예약 확정(confirm_booking): 사용자가 항공권/호텔 중 하나를 최종 선택했다고 명확히 말했을 때만 호출하세요.
+  이 도구는 결제를 대신 진행하지 않고, 사용자가 직접 예약을 완료할 수 있는 사이트 링크를 바로 안내합니다.
+  검색 결과를 먼저 충분히 보여준 뒤, 사용자가 하나를 선택하면 별도 승인 절차 없이 바로 호출하세요.
+  호텔을 확정할 때는 반드시 search_hotels 결과에 있던 그 호텔의 실제 아고다 URL을
+  booking_url 인자로 그대로 전달하고, check_out과 guests도 함께 넘기세요.
+  (URL을 직접 지어내지 말고, 검색 결과에 실제로 나온 링크만 사용하세요.)
 
 사용자의 요청을 정확히 이해하고, 적절한 도구를 사용하여 여행 계획을 도와주세요.
 
@@ -34,7 +46,13 @@ def create_travel_agent():
     agent_executor = create_agent(
         model="gpt-5.4-mini",
         tools=CUSTOM_TOOLS,
-        system_prompt=system_prompt
+        system_prompt=system_prompt,
+        middleware=[
+            travel_context_middleware,  # 오늘 날짜/계절 컨텍스트 주입
+            search_log_middleware,      # 검색 이력 기록
+            holiday_notice_middleware,  # 관광지 정기 휴무일 안내
+            trip_summary_middleware,  # 예약 확정 시 여행 계획 요약
+        ],
     )
 
     return agent_executor
