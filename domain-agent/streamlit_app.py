@@ -84,6 +84,10 @@ def main():
         background: linear-gradient(180deg, #FFF6D0 0%, #FFE9A8 55%, #FFDDA0 100%);
         background-attachment: fixed;
     }
+    /* 상단 흰색 툴바 */
+    [data-testid="stHeader"] {
+        background: transparent;
+    }
     </style>
     """,
     unsafe_allow_html=True,
