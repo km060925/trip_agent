@@ -22,26 +22,25 @@
 -  3박 4일 상하이 관광 일정 짜줘
 - 10월에 도쿄로 3박 4일 여행 가려는데 항공편, 호텔 관광지 한번에 추천해줘
 - 일본에서 지켜야하는 매너 수칙 알려줘
-- 공항에서 여권 잃어버렸을때 어떻게 해야하는지 알려줘 
-<img width="653" height="545" alt="스크린샷 2026-08-28 131526" src="https://github.com/user-attachments/assets/97795c5d-76e8-4de9-8a6c-195cdcdbb697" />
-<img width="554" height="593" alt="스크린샷 2026-08-28 131424" src="https://github.com/user-attachments/assets/c4793448-4c49-4382-854f-3c1a3066e699" />
-<img width="528" height="557" alt="스크린샷 2026-08-28 131416" src="https://github.com/user-attachments/assets/3657b8b5-2961-440c-b133-3cbf80174485" />
-<img width="595" height="575" alt="스크린샷 2026-08-28 131410" src="https://github.com/user-attachments/assets/c97bc110-3b45-4c5a-8dc0-b02091c06562" />
-<img width="569" height="570" alt="스크린샷 2026-08-28 131343" src="https://github.com/user-attachments/assets/1d724eb0-c40b-4bb3-9739-335dae8bcdcc" />
-<img width="629" height="554" alt="스크린샷 2026-08-28 131335" src="https://github.com/user-attachments/assets/a8dbe5cd-2329-4426-8117-f969d2fb5893" />
-<img width="523" height="564" alt="스크린샷 2026-08-28 131739" src="https://github.com/user-attachments/assets/54592fbe-3165-46b0-adec-30f5a04642c0" />
-<img width="499" height="579" alt="스크린샷 2026-08-28 131735" src="https://github.com/user-attachments/assets/3a0f2060-0ee2-4bb7-9580-40752a0ab796" />
-<img width="479" height="575" alt="스크린샷 2026-08-28 131730" src="https://github.com/user-attachments/assets/d69033a6-fbe9-4d03-b525-d91dca7a83ba" />
-<img width="488" height="563" alt="스크린샷 2026-08-28 131723" src="https://github.com/user-attachments/assets/b9470a0b-154c-487d-956d-6595aae0f8d3" />
-<img width="500" height="596" alt="스크린샷 2026-08-28 131656" src="https://github.com/user-attachments/assets/e125991d-dec2-438d-b36f-92f015e0d8a8" />
-<img width="515" height="542" alt="스크린샷 2026-08-28 131650" src="https://github.com/user-attachments/assets/254bff5d-c2ad-4a59-a20d-8fc74713a0bf" />
-<img width="406" height="591" alt="스크린샷 2026-08-28 131645" src="https://github.com/user-attachments/assets/09c044f5-456a-452d-9951-103a5dd53f8a" />
-<img width="450" height="585" alt="스크린샷 2026-08-28 131640" src="https://github.com/user-attachments/assets/1bc8ed1f-31e1-4158-b07a-b9f4008a45e5" />
-<img width="574" height="580" alt="스크린샷 2026-08-28 131613" src="https://github.com/user-attachments/assets/c9383605-a00a-4220-bab0-ca57734e3ffd" />
-<img width="556" height="589" alt="스크린샷 2026-08-28 131607" src="https://github.com/user-attachments/assets/8596db76-35b8-484d-8884-f50dc06cc6b3" />
-<img width="533" height="591" alt="스크린샷 2026-08-28 131558" src="https://github.com/user-attachments/assets/d2ff5150-c5a2-4113-a81e-2fc9df73e457" />
-<img width="556" height="588" alt="스크린샷 2026-08-28 131552" src="https://github.com/user-attachments/assets/b82f84d4-7df3-46e8-aab1-2b9d8d5fc5cc" />
-<img width="545" height="583" alt="스크린샷 2026-08-28 131546" src="https://github.com/user-attachments/assets/62e1ad08-82ca-4f93-a090-ca491101cf55" />
-<img width="559" height="587" alt="스크린샷 2026-08-28 131540" src="https://github.com/user-attachments/assets/35441c9a-beed-4ba0-88c8-e530aadc3d85" />
-<img width="382" height="586" alt="스크린샷 2026-08-28 131534" src="https://github.com/user-attachments/assets/3f9793ba-cc63-434e-a488-43fba2c92655" />
+- 공항에서 여권 잃어버렸을때 어떻게 해야하는지 알려줘
 
+<img width="417" height="575" alt="스크린샷 2026-08-28 141417" src="https://github.com/user-attachments/assets/b75c748b-b3ed-441e-86c9-03577e27c5c8" />
+<img width="614" height="593" alt="스크린샷 2026-08-28 141340" src="https://github.com/user-attachments/assets/58bcb6da-5be0-4f83-8429-adf08b13716b" />
+<img width="643" height="537" alt="스크린샷 2026-08-28 141336" src="https://github.com/user-attachments/assets/5b2a9631-96a4-4cf5-8c72-07d6a55ab5f8" />
+<img width="410" height="557" alt="스크린샷 2026-08-28 141329" src="https://github.com/user-attachments/assets/22eef0e5-ace4-4424-a02f-369c6bd2a09a" />
+<img width="474" height="557" alt="스크린샷 2026-08-28 141254" src="https://github.com/user-attachments/assets/787d96e6-690a-4332-8b82-f21c704f3a59" />
+<img width="525" height="548" alt="스크린샷 2026-08-28 141250" src="https://github.com/user-attachments/assets/05666d8a-b18b-45f4-b4cc-ba188e1bee80" />
+<img width="308" height="584" alt="스크린샷 2026-08-28 141420" src="https://github.com/user-attachments/assets/c9f5b342-7845-498e-86a6-8dfd332b2fbb" />
+<img width="596" height="597" alt="스크린샷 2026-08-28 141609" src="https://github.com/user-attachments/assets/52d14cbb-29b0-4a58-8ea0-26afe674cbc3" />
+<img width="576" height="584" alt="스크린샷 2026-08-28 141605" src="https://github.com/user-attachments/assets/3ccb0f2d-b819-421c-b082-6e07ede841c2" />
+<img width="593" height="589" alt="스크린샷 2026-08-28 141601" src="https://github.com/user-attachments/assets/d056bcc3-4221-4678-af36-a3cd70d88316" />
+<img width="539" height="575" alt="스크린샷 2026-08-28 141557" src="https://github.com/user-attachments/assets/a66ff5e0-a5de-48a0-b490-05a2fc4182bc" />
+<img width="579" height="574" alt="스크린샷 2026-08-28 141527" src="https://github.com/user-attachments/assets/50c26469-3130-4d6f-845b-9f16bc56776c" />
+<img width="506" height="587" alt="스크린샷 2026-08-28 141523" src="https://github.com/user-attachments/assets/fb94667a-c909-4fd5-9a35-3c9acc71648c" />
+<img width="404" height="581" alt="스크린샷 2026-08-28 141519" src="https://github.com/user-attachments/assets/4aa39829-2c34-4c63-9fc4-e9d3d9494403" />
+<img width="409" height="537" alt="스크린샷 2026-08-28 141514" src="https://github.com/user-attachments/assets/9f2e059c-dc07-4129-815e-89fdfa35a989" />
+<img width="624" height="570" alt="스크린샷 2026-08-28 141442" src="https://github.com/user-attachments/assets/83854a2d-a5b6-45d6-9845-6f4ab3d1764d" />
+<img width="566" height="591" alt="스크린샷 2026-08-28 141438" src="https://github.com/user-attachments/assets/e4cc602a-6945-4495-947c-b62746372913" />
+<img width="625" height="589" alt="스크린샷 2026-08-28 141433" src="https://github.com/user-attachments/assets/afffaf56-d70a-4952-82e5-22080ac60cff" />
+<img width="568" height="592" alt="스크린샷 2026-08-28 141429" src="https://github.com/user-attachments/assets/08da6242-b5ee-4d69-8f55-8507735d30a4" />
+<img width="591" height="564" alt="스크린샷 2026-08-28 141425" src="https://github.com/user-attachments/assets/28f0736b-80b4-404c-9deb-d5669cc98298" />
