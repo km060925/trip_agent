@@ -23,3 +23,16 @@
 - 10월에 도쿄로 3박 4일 여행 가려는데 항공편, 호텔 관광지 한번에 추천해줘
 - 일본에서 지켜야하는 매너 수칙 알려줘
 - 공항에서 여권 잃어버렸을때 어떻게 해야하는지 알려줘 
+<img width="1274" height="696" alt="스크린샷 2026-08-28 114032" src="https://github.com/user-attachments/assets/3a17c9ca-c6f9-4981-853d-5854e8710134" />
+<img width="1267" height="605" alt="스크린샷 2026-08-28 114136" src="https://github.com/user-attachments/assets/1103d31a-8ab3-4b52-a514-a405ff9b3ce1" />
+<img width="1271" height="600" alt="스크린샷 2026-08-28 114142" src="https://github.com/user-attachments/assets/cc25e861-896a-4777-be95-625c59360867" />
+<img width="1270" height="604" alt="스크린샷 2026-08-28 114101" src="https://github.com/user-attachments/assets/250b8b96-aa55-45d2-be8a-b4a8bc68446a" />
+<img width="1265" height="599" alt="스크린샷 2026-08-28 114108" src="https://github.com/user-attachments/assets/d0f712f5-adbc-42cf-bada-2da06d16da3d" />
+<img width="1267" height="595" alt="스크린샷 2026-08-28 114545" src="https://github.com/user-attachments/assets/09976d9f-806a-4adb-889d-97f35645a76a" />
+<img width="1258" height="594" alt="스크린샷 2026-08-28 114539" src="https://github.com/user-attachments/assets/cea30ee2-d466-49e7-9869-371a11c6486c" />
+<img width="1268" height="596" alt="스크린샷 2026-08-28 114532" src="https://github.com/user-attachments/assets/ce8de3cb-883d-49d4-918b-7b8ff487b580" />
+<img width="1267" height="604" alt="스크린샷 2026-08-28 114235" src="https://github.com/user-attachments/assets/435af615-7258-4efb-8723-0b97c7070560" />
+<img width="1265" height="597" alt="스크린샷 2026-08-28 114227" src="https://github.com/user-attachments/assets/b36ffc94-57a5-4134-9d5b-245a680dbdd6" />
+<img width="1268" height="601" alt="스크린샷 2026-08-28 114216" src="https://github.com/user-attachments/assets/d087eadf-c718-4bd3-bbe9-ce95ab01dd83" />
+<img width="1264" height="602" alt="스크린샷 2026-08-28 114154" src="https://github.com/user-attachments/assets/2c5022bd-3d7b-4bbb-b33f-057c77677d7e" />
+<img width="1272" height="598" alt="스크린샷 2026-08-28 114149" src="https://github.com/user-attachments/assets/21630198-7322-4018-8cf9-cdb3917d26f9" />
