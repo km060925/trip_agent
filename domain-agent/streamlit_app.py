@@ -78,7 +78,10 @@ def main():
         with open(image_path, "rb") as f:
             return base64.b64encode(f.read()).decode()
 
-    img_base64 = get_base64_image("assets/beach_bg.png")
+    # 실행 위치(로컬 domain-agent 안 vs Streamlit Cloud의 저장소 루트)에 따라
+    # cwd가 달라지므로, 이 파일 위치 기준 절대 경로로 찾음
+    bg_image_path = Path(__file__).resolve().parent / "assets" / "beach_bg.png"
+    img_base64 = get_base64_image(bg_image_path)
 
     st.markdown(
         f"""
