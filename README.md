@@ -23,16 +23,25 @@
 - 10월에 도쿄로 3박 4일 여행 가려는데 항공편, 호텔 관광지 한번에 추천해줘
 - 일본에서 지켜야하는 매너 수칙 알려줘
 - 공항에서 여권 잃어버렸을때 어떻게 해야하는지 알려줘 
-<img width="1274" height="696" alt="스크린샷 2026-08-28 114032" src="https://github.com/user-attachments/assets/3a17c9ca-c6f9-4981-853d-5854e8710134" />
-<img width="1267" height="605" alt="스크린샷 2026-08-28 114136" src="https://github.com/user-attachments/assets/1103d31a-8ab3-4b52-a514-a405ff9b3ce1" />
-<img width="1271" height="600" alt="스크린샷 2026-08-28 114142" src="https://github.com/user-attachments/assets/cc25e861-896a-4777-be95-625c59360867" />
-<img width="1270" height="604" alt="스크린샷 2026-08-28 114101" src="https://github.com/user-attachments/assets/250b8b96-aa55-45d2-be8a-b4a8bc68446a" />
-<img width="1265" height="599" alt="스크린샷 2026-08-28 114108" src="https://github.com/user-attachments/assets/d0f712f5-adbc-42cf-bada-2da06d16da3d" />
-<img width="1267" height="595" alt="스크린샷 2026-08-28 114545" src="https://github.com/user-attachments/assets/09976d9f-806a-4adb-889d-97f35645a76a" />
-<img width="1258" height="594" alt="스크린샷 2026-08-28 114539" src="https://github.com/user-attachments/assets/cea30ee2-d466-49e7-9869-371a11c6486c" />
-<img width="1268" height="596" alt="스크린샷 2026-08-28 114532" src="https://github.com/user-attachments/assets/ce8de3cb-883d-49d4-918b-7b8ff487b580" />
-<img width="1267" height="604" alt="스크린샷 2026-08-28 114235" src="https://github.com/user-attachments/assets/435af615-7258-4efb-8723-0b97c7070560" />
-<img width="1265" height="597" alt="스크린샷 2026-08-28 114227" src="https://github.com/user-attachments/assets/b36ffc94-57a5-4134-9d5b-245a680dbdd6" />
-<img width="1268" height="601" alt="스크린샷 2026-08-28 114216" src="https://github.com/user-attachments/assets/d087eadf-c718-4bd3-bbe9-ce95ab01dd83" />
-<img width="1264" height="602" alt="스크린샷 2026-08-28 114154" src="https://github.com/user-attachments/assets/2c5022bd-3d7b-4bbb-b33f-057c77677d7e" />
-<img width="1272" height="598" alt="스크린샷 2026-08-28 114149" src="https://github.com/user-attachments/assets/21630198-7322-4018-8cf9-cdb3917d26f9" />
+<img width="653" height="545" alt="스크린샷 2026-08-28 131526" src="https://github.com/user-attachments/assets/97795c5d-76e8-4de9-8a6c-195cdcdbb697" />
+<img width="554" height="593" alt="스크린샷 2026-08-28 131424" src="https://github.com/user-attachments/assets/c4793448-4c49-4382-854f-3c1a3066e699" />
+<img width="528" height="557" alt="스크린샷 2026-08-28 131416" src="https://github.com/user-attachments/assets/3657b8b5-2961-440c-b133-3cbf80174485" />
+<img width="595" height="575" alt="스크린샷 2026-08-28 131410" src="https://github.com/user-attachments/assets/c97bc110-3b45-4c5a-8dc0-b02091c06562" />
+<img width="569" height="570" alt="스크린샷 2026-08-28 131343" src="https://github.com/user-attachments/assets/1d724eb0-c40b-4bb3-9739-335dae8bcdcc" />
+<img width="629" height="554" alt="스크린샷 2026-08-28 131335" src="https://github.com/user-attachments/assets/a8dbe5cd-2329-4426-8117-f969d2fb5893" />
+<img width="523" height="564" alt="스크린샷 2026-08-28 131739" src="https://github.com/user-attachments/assets/54592fbe-3165-46b0-adec-30f5a04642c0" />
+<img width="499" height="579" alt="스크린샷 2026-08-28 131735" src="https://github.com/user-attachments/assets/3a0f2060-0ee2-4bb7-9580-40752a0ab796" />
+<img width="479" height="575" alt="스크린샷 2026-08-28 131730" src="https://github.com/user-attachments/assets/d69033a6-fbe9-4d03-b525-d91dca7a83ba" />
+<img width="488" height="563" alt="스크린샷 2026-08-28 131723" src="https://github.com/user-attachments/assets/b9470a0b-154c-487d-956d-6595aae0f8d3" />
+<img width="500" height="596" alt="스크린샷 2026-08-28 131656" src="https://github.com/user-attachments/assets/e125991d-dec2-438d-b36f-92f015e0d8a8" />
+<img width="515" height="542" alt="스크린샷 2026-08-28 131650" src="https://github.com/user-attachments/assets/254bff5d-c2ad-4a59-a20d-8fc74713a0bf" />
+<img width="406" height="591" alt="스크린샷 2026-08-28 131645" src="https://github.com/user-attachments/assets/09c044f5-456a-452d-9951-103a5dd53f8a" />
+<img width="450" height="585" alt="스크린샷 2026-08-28 131640" src="https://github.com/user-attachments/assets/1bc8ed1f-31e1-4158-b07a-b9f4008a45e5" />
+<img width="574" height="580" alt="스크린샷 2026-08-28 131613" src="https://github.com/user-attachments/assets/c9383605-a00a-4220-bab0-ca57734e3ffd" />
+<img width="556" height="589" alt="스크린샷 2026-08-28 131607" src="https://github.com/user-attachments/assets/8596db76-35b8-484d-8884-f50dc06cc6b3" />
+<img width="533" height="591" alt="스크린샷 2026-08-28 131558" src="https://github.com/user-attachments/assets/d2ff5150-c5a2-4113-a81e-2fc9df73e457" />
+<img width="556" height="588" alt="스크린샷 2026-08-28 131552" src="https://github.com/user-attachments/assets/b82f84d4-7df3-46e8-aab1-2b9d8d5fc5cc" />
+<img width="545" height="583" alt="스크린샷 2026-08-28 131546" src="https://github.com/user-attachments/assets/62e1ad08-82ca-4f93-a090-ca491101cf55" />
+<img width="559" height="587" alt="스크린샷 2026-08-28 131540" src="https://github.com/user-attachments/assets/35441c9a-beed-4ba0-88c8-e530aadc3d85" />
+<img width="382" height="586" alt="스크린샷 2026-08-28 131534" src="https://github.com/user-attachments/assets/3f9793ba-cc63-434e-a488-43fba2c92655" />
+
