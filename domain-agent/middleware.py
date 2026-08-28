@@ -8,11 +8,11 @@ from langchain_core.messages import SystemMessage, ToolMessage, AIMessage, Human
 from langchain.agents.middleware import (
     before_agent,
     after_agent,
-    wrap_tool_call,
     AgentState,
     AgentMiddleware,
     ModelRequest,
     ModelResponse,
+    ToolCallRequest,
 )
 from langgraph.runtime import Runtime
 
@@ -52,29 +52,11 @@ def travel_context_middleware(state: AgentState, runtime: Runtime) -> dict[str, 
     return {"messages": [system_message]}
 
 
-@wrap_tool_call
-def search_log_middleware(request, handler):
-    """Search Log Middleware
+def _should_log_search(tool_name: str) -> bool:
+    return tool_name in ("search_flights", "search_hotels", "get_tourist_attractions")
 
-    항공권/호텔/관광지 검색 도구가 호출될 때마다 검색 이력을 남깁니다.
-    검색 로그는 search_history/ 디렉터리에 "YYYYMMDD.jsonl" 형식으로 누적 저장됩니다.
 
-    이를 통해 사용자가 이전에 어떤 조건으로 검색했는지 추적하거나,
-    반복 질문에 대해 참고 자료로 활용할 수 있습니다.
-
-    동기(sync) 함수로 구현: Streamlit의 agent.invoke()처럼 동기 컨텍스트에서
-    호출될 때도 동작해야 하므로, async 버전만 두지 않습니다.
-    """
-    tool_name = request.tool_call["name"]
-    tool_args = request.tool_call.get("args", {})
-
-    # 여행 검색 도구만 기록
-    if tool_name not in ("search_flights", "search_hotels", "get_tourist_attractions"):
-        return handler(request)
-
-    # 실제 도구 실행
-    result = handler(request)
-
+def _write_search_log(tool_name: str, tool_args: dict) -> None:
     try:
         # 검색 이력 디렉터리 생성
         history_dir = Path("search_history")
@@ -94,34 +76,55 @@ def search_log_middleware(request, handler):
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
 
         print(f"\n[Search Log] 📝 검색 기록 저장: {log_path} ({tool_name})")
-
     except Exception as e:
         print(f"[Search Log] ⚠️ 기록 실패: {e}")
         # 기록 실패해도 원본 검색 결과는 그대로 반환
 
-    return result
 
+class SearchLogMiddleware(AgentMiddleware):
+    """Search Log Middleware
 
-@wrap_tool_call
-def holiday_notice_middleware(request, handler):
-    """Holiday Notice Middleware
+    항공권/호텔/관광지 검색 도구가 호출될 때마다 검색 이력을 남깁니다.
+    검색 로그는 search_history/ 디렉터리에 "YYYYMMDD.jsonl" 형식으로 누적 저장됩니다.
 
-    get_tourist_attractions 결과에 포함된 장소들의 정기 휴무일을 확인하여,
-    오늘이 휴무일인 장소가 있으면 결과 상단에 경고 문구를 추가합니다.
+    이를 통해 사용자가 이전에 어떤 조건으로 검색했는지 추적하거나,
+    반복 질문에 대해 참고 자료로 활용할 수 있습니다.
 
-    get_tourist_attractions가 각 장소를
-    "- 장소명 | 설명 | 운영시간: ... | 휴무일: 매주 O요일" 형식으로 반환한다는 점을 이용해
-    별도 데이터 없이 결과 텍스트만으로 오늘 휴무 여부를 판단합니다.
-
-    동기(sync) 함수로 구현: Streamlit의 agent.invoke()처럼 동기 컨텍스트에서도 동작해야 합니다.
+    LangGraph Studio(비동기 astream/ainvoke)와 Streamlit(동기 invoke) 둘 다에서
+    동작해야 하므로 sync/async 버전을 모두 클래스 메서드로 구현합니다.
     """
-    tool_name = request.tool_call["name"]
 
-    result = handler(request)
-
-    if tool_name != "get_tourist_attractions":
+    def wrap_tool_call(
+        self,
+        request: ToolCallRequest,
+        handler,
+    ):
+        tool_name = request.tool_call["name"]
+        tool_args = request.tool_call.get("args", {})
+        result = handler(request)
+        if _should_log_search(tool_name):
+            _write_search_log(tool_name, tool_args)
         return result
 
+    async def awrap_tool_call(
+        self,
+        request: ToolCallRequest,
+        handler,
+    ):
+        tool_name = request.tool_call["name"]
+        tool_args = request.tool_call.get("args", {})
+        result = await handler(request)
+        if _should_log_search(tool_name):
+            _write_search_log(tool_name, tool_args)
+        return result
+
+
+def _apply_holiday_notice(result: ToolMessage) -> ToolMessage:
+    """get_tourist_attractions가 각 장소를
+    "- 장소명 | 설명 | 운영시간: ... | 휴무일: 매주 O요일" 형식으로 반환한다는 점을 이용해
+    별도 데이터 없이 결과 텍스트만으로 오늘 휴무 여부를 판단하고, 휴무인 장소가 있으면
+    결과 상단에 경고 문구를 추가합니다.
+    """
     if not isinstance(result, ToolMessage) or not isinstance(result.content, str):
         return result
 
@@ -148,6 +151,41 @@ def holiday_notice_middleware(request, handler):
     )
 
     return result.model_copy(update={"content": notice + result.content})
+
+
+class HolidayNoticeMiddleware(AgentMiddleware):
+    """Holiday Notice Middleware
+
+    get_tourist_attractions 결과에 포함된 장소들의 정기 휴무일을 확인하여,
+    오늘이 휴무일인 장소가 있으면 결과 상단에 경고 문구를 추가합니다.
+
+    LangGraph Studio(비동기)와 Streamlit(동기) 둘 다에서 동작해야 하므로
+    sync/async 버전을 모두 클래스 메서드로 구현합니다.
+    """
+
+    def wrap_tool_call(
+        self,
+        request: ToolCallRequest,
+        handler,
+    ):
+        result = handler(request)
+        if request.tool_call["name"] != "get_tourist_attractions":
+            return result
+        return _apply_holiday_notice(result)
+
+    async def awrap_tool_call(
+        self,
+        request: ToolCallRequest,
+        handler,
+    ):
+        result = await handler(request)
+        if request.tool_call["name"] != "get_tourist_attractions":
+            return result
+        return _apply_holiday_notice(result)
+
+
+search_log_middleware = SearchLogMiddleware()
+holiday_notice_middleware = HolidayNoticeMiddleware()
 
 
 @after_agent
