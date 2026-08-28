@@ -206,17 +206,75 @@ REGION_HOTEL_DATA = {
 }
 
 
+# CITY_INFO에 없는 도시를 LLM으로 실시간 조회한 결과를 캐싱 (같은 세션 안에서 재조회 방지)
+_DYNAMIC_CITY_CACHE: dict = {}
+
+_VALID_REGIONS = {"국내", "아시아", "유럽", "미주", "오세아니아", "기타 해외"}
+
+
+def _translate_city_with_llm(city: str) -> Optional[tuple]:
+    """CITY_INFO에 없는 한국어 지명을 LLM으로 (국가, 권역, 영문 도시명)으로 변환합니다.
+    실패하면 None을 반환합니다. 결과는 _DYNAMIC_CITY_CACHE에 캐싱되어 같은 도시를
+    다시 조회할 때는 LLM을 다시 호출하지 않습니다.
+    """
+    try:
+        from langchain_openai import ChatOpenAI
+
+        model = ChatOpenAI(model="gpt-5.4-mini", temperature=0)
+        prompt = (
+            "다음은 한국어로 표기된 여행지(도시) 이름입니다. "
+            "이 도시의 정확한 영문 이름, 국가명(한국어), 권역을 판단하세요.\n"
+            "권역은 반드시 '국내', '아시아', '유럽', '미주', '오세아니아', '기타 해외' 중 하나여야 합니다.\n"
+            "- 대한민국 도시면 '국내'\n"
+            "- 그 외에는 대륙 기준으로 아시아/유럽/미주(북중남미)/오세아니아 중 하나를 고르고,\n"
+            "  실존하는 도시인지 확신할 수 없거나 위 대륙 어디에도 애매하면 '기타 해외'로 답하세요.\n\n"
+            "다른 설명 없이 정확히 이 형식으로만 답하세요: 영문도시명|국가명|권역\n"
+            "예시: 도쿄 -> Tokyo|일본|아시아\n\n"
+            f"지명: {city}\n답변:"
+        )
+        response = model.invoke(prompt)
+        text = (response.content or "").strip()
+
+        parts = [p.strip() for p in text.split("|")]
+        if len(parts) != 3 or not all(parts):
+            return None
+
+        english_name, country, region = parts
+        if region not in _VALID_REGIONS:
+            region = "기타 해외"
+
+        result = (country, region, english_name)
+        _DYNAMIC_CITY_CACHE[city] = result
+        return result
+    except Exception as e:
+        print(f"[City Lookup] ⚠️ '{city}' LLM 조회 실패: {e}")
+        return None
+
+
+def _lookup_city(city: Optional[str]) -> Optional[tuple]:
+    """도시 이름으로 (국가, 권역, 영문 도시명)을 찾습니다.
+    CITY_INFO(수동 등록 목록) -> 이번 세션 캐시 -> LLM 실시간 조회 순으로 시도합니다.
+    """
+    if not city:
+        return None
+    if city in CITY_INFO:
+        return CITY_INFO[city]
+    if city in _DYNAMIC_CITY_CACHE:
+        return _DYNAMIC_CITY_CACHE[city]
+    return _translate_city_with_llm(city)
+
+
 def _get_region(departure: Optional[str], destination: Optional[str]) -> str:
     """도착지를 우선으로, 없으면 출발지를 기준으로 가격 산정용 권역을 판단합니다.
     (화면에는 노출되지 않고, 어떤 항공/숙박 가격 데이터를 쓸지 결정하는 데만 사용됩니다.)"""
     for city in (destination, departure):
         if not city:
             continue
-        info = CITY_INFO.get(city)
+        info = _lookup_city(city)
         if info:
             return info[1]
 
-    # CITY_INFO에 없는 도시가 하나라도 주어졌다면 '기타 해외'로 취급
+    # 어느 쪽도 조회에 성공하지 못했지만 도시가 하나라도 주어졌다면 '기타 해외'로 취급
     if departure or destination:
         return "기타 해외"
 
@@ -224,11 +282,11 @@ def _get_region(departure: Optional[str], destination: Optional[str]) -> str:
 
 
 def _get_display_name(city: Optional[str]) -> Optional[str]:
-    """도시 이름을 '국가 도시' 형태로 반환합니다. 알려진 도시가 아니면 도시 이름 그대로 반환합니다.
+    """도시 이름을 '국가 도시' 형태로 반환합니다. 조회에 실패하면 도시 이름 그대로 반환합니다.
     괌처럼 국가 표기 자체에 도시 이름이 이미 포함된 경우(예: '괌(미국령)')는 중복 없이 그대로 반환합니다."""
     if not city:
         return None
-    info = CITY_INFO.get(city)
+    info = _lookup_city(city)
     if not info:
         return city
     country = info[0]
@@ -238,10 +296,10 @@ def _get_display_name(city: Optional[str]) -> Optional[str]:
 
 
 def _get_english_name(city: Optional[str]) -> Optional[str]:
-    """아고다 검색 쿼리용 영문 도시명을 반환합니다. 알려진 도시가 아니면 원래 이름 그대로 반환합니다."""
+    """검색 쿼리용 영문 도시명을 반환합니다. 조회에 실패하면 원래 이름 그대로 반환합니다."""
     if not city:
         return None
-    info = CITY_INFO.get(city)
+    info = _lookup_city(city)
     return info[2] if info else city
 
 
